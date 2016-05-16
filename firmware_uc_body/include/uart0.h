@@ -17,6 +17,7 @@ void uart0_print(char*);
 void uart0_println(char*);
 void uart0_printUInt8(uint8_t);
 void uart0_printUInt16(uint16_t);
+void uart0_printInt16(int16_t);
 void uart0_printUInt8B(uint8_t);
 uint8_t uart0_getc(char*);
 // receive-ISR UART0

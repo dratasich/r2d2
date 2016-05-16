@@ -101,6 +101,24 @@ void uart0_printUInt16(uint16_t value)
   uart0_putc(value%10 + '0');
 }
 
+void uart0_printInt16(int16_t value)
+{
+  if (value < 0) {
+    uart0_putc('-');
+    value = -value;
+  } else
+    uart0_putc(' ');
+
+  uart0_putc(value/10000 + '0');
+  value %= 10000;
+  uart0_putc(value/1000 + '0');
+  value %= 1000;
+  uart0_putc(value/100 + '0');
+  value %= 100;
+  uart0_putc(value/10 + '0');
+  uart0_putc(value%10 + '0');
+}
+
 // receive complete
 ISR(USART0_RX_vect) {
   uart0_receive_data = UDR0;

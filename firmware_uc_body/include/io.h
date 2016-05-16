@@ -19,6 +19,8 @@
 // ----------------------------------------------------------------------
 #define FOSZ			16000000
 
+// Timer 2 as general purpose timer
+
 // ---------------------------------------------------------------
 // external interrupts ports
 // ---------------------------------------------------------------
@@ -37,6 +39,14 @@
 #define STEPPERMOTOR_A2		PA2 // green
 #define STEPPERMOTOR_B1		PA1 // black
 #define STEPPERMOTOR_B2		PA0 // yellow
+
+// DC motor
+#define MOTOR_PORT              PORTB
+#define MOTOR_DDR               DDRB
+#define MOTOR_IN1               PB7 // input for bridge A
+#define MOTOR_IN2               PB6
+#define MOTOR_ENA               PB5 // OC1A enable A
+// Timer 1 for PWM signal generation: OC1A
 
 // UART0 and UART1 pins are automatically controlled (so there are no
 // pin definitions needed)
