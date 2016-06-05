@@ -13,3 +13,8 @@
 # executables
 *.out
 *.hex
+
+# 3d output files
+*.stl
+*.gco
+*.gcode
