@@ -19,3 +19,7 @@
 *.gco
 *.gcode
 *.FCStd*
+
+# kicad
+*.bak
+*-cache.*
