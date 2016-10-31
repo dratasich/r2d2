@@ -18,3 +18,4 @@
 *.stl
 *.gco
 *.gcode
+*.FCStd*
