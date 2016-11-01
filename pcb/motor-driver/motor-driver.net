@@ -1,15 +1,15 @@
 (export (version D)
   (design
-    (source /home/denise/repos/private/motor-shield/motor-shield.sch)
+    (source /home/denise/repos/private/motor-driver/motor-driver.sch)
     (date "Mon 31 Oct 2016 06:46:42 PM CET")
     (tool "Eeschema 4.0.4+e1-6308~48~ubuntu14.04.1-stable")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
-        (title "Motor Shield")
+        (title "Motor Driver")
         (company)
         (rev 1.0)
         (date 2016-09-15)
-        (source motor-shield.sch)
+        (source motor-driver.sch)
         (comment (number 1) (value ""))
         (comment (number 2) (value ""))
         (comment (number 3) (value ""))
