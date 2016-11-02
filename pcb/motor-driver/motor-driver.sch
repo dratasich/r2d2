@@ -29,6 +29,7 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:stm
+LIBS:motor-driver-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -69,11 +70,11 @@ Text Label 2200 1700 0    60   ~ 0
 OUTB
 Text Label 2200 1600 0    60   ~ 0
 OUTA
-Text Label 2200 4000 0    60   ~ 0
-INB
-Text Label 2200 3900 0    60   ~ 0
-INA
 Text Label 2200 4100 0    60   ~ 0
+INB
+Text Label 2200 4000 0    60   ~ 0
+INA
+Text Label 2200 3900 0    60   ~ 0
 PWM
 Text Label 2200 4200 0    60   ~ 0
 CS
@@ -255,17 +256,6 @@ F 1 "VCC" H 2300 2750 50  0000 C CNN
 F 2 "" H 2300 2600 50  0000 C CNN
 F 3 "" H 2300 2600 50  0000 C CNN
 	1    2300 2600
-	1    0    0    -1  
-$EndComp
-$Comp
-L 2N7002 Q1
-U 1 1 57DB0816
-P 6900 4950
-F 0 "Q1" H 7100 5025 50  0000 L CNN
-F 1 "2N7002" H 7100 4950 50  0000 L CNN
-F 2 "TO_SOT_Packages_SMD:SOT-23" H 7100 4875 50  0001 L CIN
-F 3 "" H 6900 4950 50  0000 L CNN
-	1    6900 4950
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -525,7 +515,7 @@ Wire Wire Line
 Wire Wire Line
 	6500 4300 7000 4300
 Connection ~ 7000 4300
-Text Notes 7700 5000 0    60   ~ 0
+Text Notes 7700 4800 0    60   ~ 0
 battery\nreverse\nprotection
 $Comp
 L CP1 C1
@@ -663,4 +653,15 @@ Wire Wire Line
 Connection ~ 7800 3800
 Wire Wire Line
 	5300 2500 6000 2500
+$Comp
+L IRF540N Q1
+U 1 1 581A170F
+P 6900 4950
+F 0 "Q1" H 7150 5025 50  0000 L CNN
+F 1 "IRF540N" H 7150 4950 50  0000 L CNN
+F 2 "TO_SOT_Packages_SMD:TO-252-2Lead" H 7150 4875 50  0000 L CIN
+F 3 "" H 6900 4950 50  0000 L CNN
+	1    6900 4950
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

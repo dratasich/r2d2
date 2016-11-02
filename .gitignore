@@ -21,5 +21,5 @@
 *.FCStd*
 
 # kicad
-*.bak
+*bak
 *-cache.*
