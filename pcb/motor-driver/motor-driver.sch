@@ -29,7 +29,6 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:stm
-LIBS:motor-shield-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -275,7 +274,7 @@ U 1 1 57DB08AB
 P 6500 4600
 F 0 "D4" H 6500 4700 50  0000 C CNN
 F 1 "ZENER" H 6500 4500 50  0000 C CNN
-F 2 "Wire_Pads:SolderWirePad_2x_2mmDrill" H 6500 4600 50  0001 C CNN
+F 2 "Diodes_ThroughHole:Diode_DO-35_SOD27_Horizontal_RM10" H 6500 4600 50  0001 C CNN
 F 3 "" H 6500 4600 50  0000 C CNN
 	1    6500 4600
 	0    -1   -1   0   
