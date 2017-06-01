@@ -9,3 +9,9 @@ Software, 3D drawings for R2D2 build.
 * `cad` contains FreeCAD projects for R2D2 (e.g., custom dome bearing).
 
 * `pcb` holds Kicad projects for PCBs used in R2D2 (e.g., motor driver shield).
+
+
+## Dependencies
+
+For some cad drawings the library
+[JohK/nutsnbolts](https://github.com/JohK/nutsnbolts) is used.
