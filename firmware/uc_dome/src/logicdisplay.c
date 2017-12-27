@@ -69,7 +69,10 @@ void logicdisplay_init(void)
     // TODO
 
     // init frame change
-    gpt_init();
+    /* gpt_init(US100); */
+    /* gpt_requestTimer(2500, logicdisplay_frame); */
+    /* gpt_requestTimer(10, logicdisplay_step); */
+    gpt_init(MS1);
     gpt_requestTimer(250, logicdisplay_frame);
     gpt_requestTimer(1, logicdisplay_step);
 

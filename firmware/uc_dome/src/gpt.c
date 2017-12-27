@@ -14,8 +14,8 @@
 
 typedef struct {
     void (*callback)(void);
-    volatile uint16_t overflowTime;
-    volatile uint16_t remainingTime;
+    uint16_t overflowTime;
+    uint16_t remainingTime;
 } GPTimer_t;
 
 static volatile uint32_t time = 0;
@@ -24,30 +24,43 @@ static volatile uint32_t time = 0;
 static uint8_t numTimers = 0;
 
 /** Timer element, collects information to timer requests. */
-static GPTimer_t timers[GPT_MAX_TIMERS];
+static volatile GPTimer_t timers[GPT_MAX_TIMERS];
 
 /** Initialized flag. */
-static uint8_t initialized = 0;
+static gpt_resolution_t initialized = UNSPEC;
 
-void gpt_init(void)
+gpt_resolution_t gpt_init(gpt_resolution_t resolution)
 {
-    if (initialized)
-        return;
+    if (initialized != UNSPEC)
+        return initialized;
 
     // mark timer elements as unused
     for (uint8_t i = 0; i < GPT_MAX_TIMERS; i++)
         timers[i].overflowTime = 0;
 
-    // Timer 2 (8-Bit Timer) in CTC mode
-    TCCR2A = 0x02;
-    TCCR2B |= (4<<CS20); //prescaler = 64, timer started
-    // tpuls = 4 us
-    OCR2A = 249; // 250 pulses => 1 ms interrupt
-    TIMSK2 |= (1<<OCIE2A); // enable compare match interrupt
+    // init Timer 2 (8-Bit Timer)
+    TCCR2A = 0x02; // CTC mode
+    switch(resolution) {
+    case MS1:
+        // prescaler = 64 (tpuls = 4us), starts timer
+        TCCR2B |= (4<<CS20);
+        OCR2A = 249; // 250 pulses => 1 ms interrupt
+        break;
+    case US100:
+        // prescaler = 8 (tpuls = 0.5 us), starts timer
+        TCCR2B |= (2<<CS20);
+        OCR2A = 199; // 200 pulses => 0.1 ms interrupt
+        break;
+    default:
+        // timer won't be started
+        return initialized = UNSPEC;
+    }
 
+    // enable compare match interrupt
+    TIMSK2 |= (1<<OCIE2A);
     sei();
 
-    initialized = 1;
+    return initialized = resolution;
 }
 
 uint32_t gpt_getTime(void)

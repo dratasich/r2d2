@@ -13,8 +13,10 @@
 
 #define	GPT_MAX_TIMERS		10
 
+typedef enum { MS1, US100, UNSPEC } gpt_resolution_t;
+
 /** Initializes general purpose timer. */
-void gpt_init(void);
+gpt_resolution_t gpt_init(gpt_resolution_t resolution);
 
 /** Returns current ms from startup (overflow after about 49 days!). If you
  * want to count on your own. */
