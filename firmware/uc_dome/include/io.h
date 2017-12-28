@@ -19,23 +19,33 @@
 // ----------------------------------------------------------------------
 #define FOSZ			16000000
 
+// ----------------------------------------------------------------------
+// modules
+// ----------------------------------------------------------------------
+
 // Timer 2 as general purpose timer
+// UART0 used for debugging
 
 // ----------------------------------------------------------------------
 // ports, pins, ADC-channels, etc.
 // ----------------------------------------------------------------------
 // front logic display
-#define LOGICDISPLAY_FRONT_ROWS_PORT    PORTC
-#define LOGICDISPLAY_FRONT_ROWS_DDR     DDRC
-#define LOGICDISPLAY_FRONT_COLS_PORT    PORTL
-#define LOGICDISPLAY_FRONT_COLS_DDR     DDRL
+#define LOGICDISPLAY_FRONT_ROWS_PORT    PORTA
+#define LOGICDISPLAY_FRONT_ROWS_DDR     DDRA
+#define LOGICDISPLAY_FRONT_COLS_PORT    PORTC
+#define LOGICDISPLAY_FRONT_COLS_DDR     DDRC
+// rear logic display
+#define LOGICDISPLAY_REAR_PORT1         PORTF
+#define LOGICDISPLAY_REAR_DDR1          DDRF
+#define LOGICDISPLAY_REAR_MASK1         (0xFE) // used pins of PORT1
+#define LOGICDISPLAY_REAR_PORT2         PORTK
+#define LOGICDISPLAY_REAR_DDR2          DDRK
+#define LOGICDISPLAY_REAR_MASK2         (0xFF) // used pins of PORT2
 
-// UART0 and UART1 pins are automatically controlled (so there are no
+// UART0 pins are automatically controlled (so there are no
 // pin definitions needed)
-// RXD0: PE0,
-// TXD0: PE1,
-// RXD1: PD2,
-// TXD1: PD3
+// RXD0: PE0
+// TXD0: PE1
 
 // ----------------------------------------------------------------------
 // macros
