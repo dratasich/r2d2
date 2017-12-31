@@ -19,6 +19,7 @@
  * Low on row r and high on column c means the LED_{r,c} is on.
  */
 
+#include "logicdisplay.h"
 #include "io.h"	// port, pins definition
 #include "gpt.h"
 
@@ -82,7 +83,8 @@ static void logicdisplay_step(void)
     // switch to next row
     row = (row + 1) % LD_FRONT_ROWS;
     // apply current column
-    LOGICDISPLAY_FRONT_COLS_PORT = frame_front[row];
+    LOGICDISPLAY_FRONT_COLS_PORT &= ~LOGICDISPLAY_FRONT_COLS_MASK;
+    LOGICDISPLAY_FRONT_COLS_PORT |= frame_front[row] << 1;
     // turn on a row
     LOGICDISPLAY_FRONT_ROWS_PORT = (1 << row);
 
