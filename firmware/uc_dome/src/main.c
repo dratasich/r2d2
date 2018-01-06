@@ -19,6 +19,21 @@ void led_blink(void)
   TOGGLE_BIT(PORTB, PB7);
 }
 
+/*
+void ld_change(void)
+{
+    static char testr[6] = "ABCDE";
+    static char testf[3] = "00";
+    testf[0]++;
+    if (testf[0] > '9')
+        testf[0] = '0';
+    testr[0]++;
+    if (testr[0] > 'Z')
+        testr[0] = 'A';
+    logicdisplay_print(testf, testf, testr);
+}
+*/
+
 int main(void)
 {
   uart0_println("[INFO ] init UART0");
@@ -26,7 +41,10 @@ int main(void)
 
   uart0_println("[INFO ] init logic display");
   logicdisplay_init();
-
+/*
+  logicdisplay_mode(LOGICDISPLAY_CHAR);
+  gpt_requestTimer(10000, ld_change);
+*/
   uart0_println("[INFO ] init alive LED");
   gpt_resolution_t res = gpt_init(MS1);
   DDRB |= (1<<PB7);
