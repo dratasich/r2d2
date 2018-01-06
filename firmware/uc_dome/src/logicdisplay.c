@@ -31,8 +31,8 @@
 #define LD_REAR_ROWS            (4)
 #define LD_REAR_COLS            (22)
 
-#define LD_REAR_COLS_UC         (0x7E) // column pins to LEDs directly
-#define LD_REAR_DISABLE_DM      (0x80) // enable pin for demux (active low)
+#define LD_REAR_COLS_UC         (0xFC) // column pins to LEDs directly
+#define LD_REAR_DISABLE_DM      (0x02) // enable pin for demux (active low)
 #define LD_REAR_COLS_DM         (0x0F) // column pins to demux
 #define LD_REAR_ROWS_UC         (0xF0) // row pins of PORT2 (active high)
 
@@ -60,7 +60,7 @@ static void logicdisplay_rear_set_column(uint8_t column) {
         LOGICDISPLAY_REAR_PORT1 &= ~(LD_REAR_DISABLE_DM);
     } else {
         // top 6 LED columns controlled by uc directly
-        LOGICDISPLAY_REAR_PORT1 &= ~(1 << (column-16+1));
+        LOGICDISPLAY_REAR_PORT1 &= ~(1 << (column-16+2));
     }
 }
 
