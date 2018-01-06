@@ -169,6 +169,43 @@ void logicdisplay_print(const char *front_up, const char *front_lo,
     }
 }
 
+/** Changes the frame in mode 'CHASER'. */
+static void logicdisplay_frame_chaser(void)
+{
+    static int8_t posf = 0, posr = 0;
+    static int8_t dirf = 1, dirr = 1;
+    static uint8_t slow = 0;
+
+    // light up next column
+    for (uint8_t r = 0; r < LD_FRONT_ROWS; r++) {
+        frame_front[r] = 1 << posf;
+    }
+    // rear
+    for (uint8_t c = 0; c < LD_REAR_COLS; c++) {
+        if (c == posr)
+            frame_rear[c] = 0xFF;
+        else
+            frame_rear[c] = 0x00;
+    }
+
+    // update front light chaser position
+    if (slow >= 1) {
+        if (posf >= LD_FRONT_COLS - 1)
+            dirf = -1;
+        if (posf <= 0)
+            dirf = +1;
+        posf = (posf + dirf) % LD_FRONT_COLS;
+    }
+    slow = (slow + 1) % 2;
+
+    // update rear light chaser position
+    if (posr >= LD_REAR_COLS - 1)
+        dirr = -1;
+    if (posr <= 0)
+        dirr = +1;
+    posr = (posr + dirr) % LD_REAR_COLS;
+}
+
 
 // low-level control
 
@@ -250,12 +287,13 @@ void logicdisplay_init(void)
 
 void logicdisplay_mode(logicdisplay_mode_t new_mode)
 {
-    static int8_t gptid_random = -1;
+    static int8_t gptid = -1;
 
     // quit current mode
     switch(mode) {
     case LOGICDISPLAY_RANDOM:
-        gpt_releaseTimer(gptid_random);
+    case LOGICDISPLAY_CHASER:
+        gpt_releaseTimer(gptid);
         break;
     case LOGICDISPLAY_CHAR:
         // nothing to do
@@ -268,11 +306,14 @@ void logicdisplay_mode(logicdisplay_mode_t new_mode)
     // apply new mode
     switch(new_mode) {
     case LOGICDISPLAY_RANDOM:
-        gptid_random = gpt_requestTimer(2500, logicdisplay_frame_random);
+        gptid = gpt_requestTimer(2500, logicdisplay_frame_random);
         break;
     case LOGICDISPLAY_CHAR:
         // nothing to do here
         // set character to update frame
+        break;
+    case LOGICDISPLAY_CHASER:
+        gptid = gpt_requestTimer(500, logicdisplay_frame_chaser);
         break;
     default:
         // shall not be used -- abort

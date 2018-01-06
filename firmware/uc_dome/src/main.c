@@ -45,6 +45,10 @@ int main(void)
   logicdisplay_mode(LOGICDISPLAY_CHAR);
   gpt_requestTimer(10000, ld_change);
 */
+/*
+  logicdisplay_mode(LOGICDISPLAY_CHASER);
+*/
+
   uart0_println("[INFO ] init alive LED");
   gpt_resolution_t res = gpt_init(MS1);
   DDRB |= (1<<PB7);

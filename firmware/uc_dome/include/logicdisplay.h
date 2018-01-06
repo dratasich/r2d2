@@ -12,6 +12,7 @@
 typedef enum {
     LOGICDISPLAY_RANDOM = 0, // normal operation
     LOGICDISPLAY_CHAR, // e.g., for debuging
+    LOGICDISPLAY_CHASER, // for fun
     LOGICDISPLAY_NUM_MODES
 } logicdisplay_mode_t;
 
